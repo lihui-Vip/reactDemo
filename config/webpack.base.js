@@ -1,6 +1,10 @@
 const path = require("path");
 
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
 
 module.exports = {
 
@@ -8,7 +12,7 @@ module.exports = {
 
   entry: {
 
-    main: '../src/client'
+    main: resolve('../src/client'),
 
   },
 
@@ -25,6 +29,12 @@ module.exports = {
 
   module: {},
 
-  plugins: []
+  plugins: [
+    new HtmlWebpackPlugin({
+      api: 'http://10.20.0.56:8088/',
+      title: 'react',
+      template: resolve('index.html'),
+    }),
+  ]
 
 };
