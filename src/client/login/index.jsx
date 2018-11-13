@@ -1,11 +1,9 @@
-
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router'
-
 
 class Login extends Component {
   handleSubmit = (e) => {
-    this.props.history.push({ pathname: '/app' });
+    console.log(this.props);
+    this.props.history.push('/');
   };
 
   render() {
