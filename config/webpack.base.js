@@ -28,6 +28,15 @@ module.exports = {
         }
       },
       {
+        test: /\.attached\.less$/,
+        use: [
+          // { loader: 'style-loader/useable' }  useable 挂载
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'less-loader' },
+        ],
+      },
+      {
         test: /\.css$/,
         use: [
           { loader: 'style-loader' },
@@ -37,7 +46,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx','.attached.less', '.global.less', '.less']
   },
   plugins: [
     new HtmlWebpackPlugin({

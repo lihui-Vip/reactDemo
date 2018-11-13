@@ -1,21 +1,95 @@
+
+/**
+ * 登录页
+ */
 import React, { Component } from 'react';
+// 引入antd组件
+import { Icon, Form, Input, Button, message } from 'antd';
+// 引入 封装后的fetch工具类
+// import { post } from '../utils/request';
+// 引入样式表
+import './css';
+const FormItem = Form.Item;
 
 class Login extends Component {
-  handleSubmit = (e) => {
-    console.log(this.props);
-    this.props.history.push('/');
-  };
+  // 构造器
+  constructor () {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  render() {
+  handleSubmit (e) {
+    // 通知 Web 浏览器不要执行与事件关联的默认动作
+    e.preventDefault();
+    // 表单验证
+    this.props.form.validateFields((err, values) => {
+      if(!err){
+        // 发起请求
+        // post('http://localhost:8000/login', values)
+        //   // 成功的回调
+        //   .then((res) => {
+        //     if(res){
+        //       message.info('登录成功');
+        //       // 页面跳转
+        //       this.context.router.push('/');
+        //     }else{
+        //       message.info('登录失败,账号或密码错误');
+        //     }
+        //   });
+      }
+    });
+  }
+
+  render () {
+    const { form } = this.props;
+    // 验证规则
+    const { getFieldDecorator } = form;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="userName" />
-        <input type="text" placeholder="repo" />
-        <button type="submit">Go</button>
-      </form>
+      <div className="wrapper">
+        <div className="box">
+          <header className="header">
+            ReactManager
+          </header>
+
+          <section className="form">
+            <Form onSubmit={this.handleSubmit}>
+              <FormItem>
+                {getFieldDecorator('account',{
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入管理员帐号',
+                      type: 'string'
+                    }
+                  ]
+                })(
+                  <Input type="text" prefix={<Icon type="user" />} />
+                )}
+              </FormItem>
+
+              <FormItem>
+                {getFieldDecorator('password',{
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入密码',
+                      type: 'string'
+                    }
+                  ]
+                })(
+                  <Input type="password" prefix={<Icon type="lock" />} />
+                )}
+              </FormItem>
+
+              <Button className="btn" type="primary" htmlType="submit">登录</Button>
+            </Form>
+          </section>
+        </div>
+      </div>
     );
   }
 }
 
+Login = Form.create()(Login);
 
 export default Login;
