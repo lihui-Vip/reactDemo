@@ -24,13 +24,13 @@ class Login extends Component {
     this.props.form.validateFields((err, values) => {
       if(!err){
         // 发起请求
-        ajax.post('/login', values)
+        ajax.post('/auth/login', values)
           // 成功的回调
           .then((res) => {
             if(res){
               message.info('登录成功');
               // 页面跳转
-              this.context.router.push('/');
+              this.props.history.push('/');
             }else{
               message.info('登录失败,账号或密码错误');
             }
