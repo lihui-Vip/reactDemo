@@ -12,34 +12,36 @@ import './css';
 const FormItem = Form.Item;
 class Login extends Component {
   // 构造器
-  constructor () {
+  constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit (e) {
+  handleSubmit(e) {
     // 通知 Web 浏览器不要执行与事件关联的默认动作
     e.preventDefault();
     // 表单验证
     this.props.form.validateFields((err, values) => {
-      if(!err){
+      if (!err) {
         // 发起请求
         ajax.post('/auth/login', values)
           // 成功的回调
           .then((res) => {
-            if(res){
+            if (res) {
               message.info('登录成功');
               // 页面跳转
               this.props.history.push('/');
-            }else{
+            } else {
               message.info('登录失败,账号或密码错误');
             }
+          }).catch(err => {
+            console.log(err, '异常1');
           });
       }
     });
   }
 
-  render () {
+  render() {
     const { form } = this.props;
     // 验证规则
     const { getFieldDecorator } = form;
@@ -53,7 +55,7 @@ class Login extends Component {
           <section className="form">
             <Form onSubmit={this.handleSubmit}>
               <FormItem>
-                {getFieldDecorator('account',{
+                {getFieldDecorator('account', {
                   rules: [
                     {
                       required: true,
@@ -67,7 +69,7 @@ class Login extends Component {
               </FormItem>
 
               <FormItem>
-                {getFieldDecorator('password',{
+                {getFieldDecorator('password', {
                   rules: [
                     {
                       required: true,
