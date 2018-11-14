@@ -47,7 +47,7 @@ class Login extends Component {
       <div className="wrapper">
         <div className="box">
           <header className="header">
-            ReactManager
+            Welcome
           </header>
 
           <section className="form">
