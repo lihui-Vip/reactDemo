@@ -6,11 +6,10 @@ import React, { Component } from 'react';
 // 引入antd组件
 import { Icon, Form, Input, Button, message } from 'antd';
 // 引入 封装后的fetch工具类
-// import { post } from '../utils/request';
+import ajax from '$lib/utils/request';
 // 引入样式表
 import './css';
 const FormItem = Form.Item;
-
 class Login extends Component {
   // 构造器
   constructor () {
@@ -25,17 +24,17 @@ class Login extends Component {
     this.props.form.validateFields((err, values) => {
       if(!err){
         // 发起请求
-        // post('http://localhost:8000/login', values)
-        //   // 成功的回调
-        //   .then((res) => {
-        //     if(res){
-        //       message.info('登录成功');
-        //       // 页面跳转
-        //       this.context.router.push('/');
-        //     }else{
-        //       message.info('登录失败,账号或密码错误');
-        //     }
-        //   });
+        ajax.post('/login', values)
+          // 成功的回调
+          .then((res) => {
+            if(res){
+              message.info('登录成功');
+              // 页面跳转
+              this.context.router.push('/');
+            }else{
+              message.info('登录失败,账号或密码错误');
+            }
+          });
       }
     });
   }
@@ -89,7 +88,7 @@ class Login extends Component {
     );
   }
 }
-
+//经 Form.create() 包装过的组件会自带 this.props.form 属性，直接传给 Form 即可
 Login = Form.create()(Login);
 
 export default Login;

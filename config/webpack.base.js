@@ -46,7 +46,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx','.attached.less', '.global.less', '.less']
+    extensions: ['.js', '.jsx','.attached.less', '.global.less', '.less'],
+    alias: {
+      '$lib': resolve('../src/lib'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
