@@ -3,7 +3,7 @@ import { Random } from 'mockjs';
 import pack from '../pack';
 
 module.exports = function (router) {
-  router.post('/auth/login', (req, res) => {
+  router.post('/login', (req, res) => {
     if (req.body.account === 'admin' && req.body.password === '123456') {
       const data = {
         "token": "e10adc3949ba59abbe56e057f20f883e",

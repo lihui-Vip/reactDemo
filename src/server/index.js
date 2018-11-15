@@ -15,9 +15,20 @@ const app = new Express();
 const loginRouter = new Router();
 require('./logic/login')(loginRouter);
 
+const defaultRouter = new Router();
+require('./logic/user')(defaultRouter);
+require('./logic/book')(defaultRouter);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(loginRouter);
+app.use('/auth', loginRouter)
+  .use('/api', defaultRouter);
+
+app.use((req, res, next) => {
+  console.log('Request URL:', req.url);
+
+  next();
+});
 
 app.use(webpackMiddleware(webpack(webpackConfig), {
   quiet: true,

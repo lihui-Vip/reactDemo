@@ -40,9 +40,28 @@ export default {
         url,
         params: param,
       }).then(res => {  //axios返回的是一个promise对象
-        resolve(res)  //resolve在promise执行器内部
+        if (res !== ejection) {
+          resolve(res);
+        }  //resolve在promise执行器内部
       }).catch(err => {
-        console.log(err, '异常')
+        reject(err);
+      })
+
+    })
+  },
+  //del请求
+  del(url, param) {
+    return new Promise((resolve, reject) => {
+      service({
+        method: 'delete',
+        url,
+        params: param,
+      }).then(res => {  //axios返回的是一个promise对象
+        if (res !== ejection) {
+          resolve(res);
+        }  //resolve在promise执行器内部
+      }).catch(err => {
+        reject(err);
       })
 
     })
