@@ -30,8 +30,8 @@ module.exports = {
       {
         test: /\.attached\.less$/,
         use: [
-          // { loader: 'style-loader/useable' }  useable 挂载
-          { loader: 'style-loader' },
+          { loader: 'style-loader/useable' },  //useable  使用style.use() 或 style.unuse();
+          // { loader: 'style-loader' },
           { loader: 'css-loader' },
           { loader: 'less-loader' },
         ],

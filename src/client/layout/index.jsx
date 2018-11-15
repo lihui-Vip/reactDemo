@@ -13,12 +13,18 @@ import UserList from '../userList';
 import addUser from '../addUser';
 import bookList from '../bookList';
 import addBook from '../addBook';
-import './css';
+import style from './css';
 
 // 左侧菜单栏
 const SubMenu = Menu.SubMenu;
 
 class HomeLayout extends Component {
+  componentDidMount() {
+    style.use();
+  }
+  componentWillUnmount() {
+    style.unuse();
+  }
   render() {
     return (
       <div>

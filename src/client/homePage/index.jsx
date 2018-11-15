@@ -3,9 +3,15 @@
  */
 import React from 'react';
 // 引入样式表
-import './css';
+import style from './css';
 
 class Home extends React.Component {
+  componentDidMount() {
+    style.use();
+  }
+  componentWillUnmount() {
+    style.unuse();
+  }
   // 构造器
   constructor(props) {
     super(props);

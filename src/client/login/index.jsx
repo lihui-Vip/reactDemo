@@ -8,13 +8,20 @@ import { Icon, Form, Input, Button, message } from 'antd';
 // 引入 封装后的fetch工具类
 import ajax from '$lib/utils/request';
 // 引入样式表
-import './css';
+import style from './css';
 const FormItem = Form.Item;
 class Login extends Component {
   // 构造器
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    style.use();
+  }
+  componentWillUnmount() {
+    style.unuse();
   }
 
   handleSubmit(e) {
