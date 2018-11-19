@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
 let Delay = 200
   , Loading = null;
@@ -61,7 +62,10 @@ class AsyncComponent extends React.PureComponent {
       , loadingX = loading || Loading;
 
     if (Component) {
-      return React.createElement(Component, rest);
+      // return React.createElement(Component, rest);
+      return (
+        <Route {...rest} component={Component} />
+      );
     } else if (this.state.isExpired) {
       return loadingX ? React.createElement(loadingX) : null;
     } else {

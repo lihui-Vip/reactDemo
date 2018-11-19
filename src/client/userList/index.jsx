@@ -4,10 +4,10 @@
 import React from 'react';
 // 引入 antd 组件
 // import { message, Table, Button, Popconfirm } from 'antd';
-import message from 'antd/lib/message';
-import Table from 'antd/lib/table';
-import Button from 'antd/lib/button';
-import Popconfirm from 'antd/lib/popconfirm';
+import message from 'antd/es/message';
+import Table from 'antd/es/table';
+import Button from 'antd/es/button';
+import Popconfirm from 'antd/es/popconfirm';
 // 引入 封装后的fetch工具类
 import ajax from '$lib/utils/request';
 
@@ -125,5 +125,4 @@ class UserList extends React.Component {
 //   router: PropTypes.object.isRequired
 // };
 
-// export default UserList;
-export default () => <Route component={UserList} />;
+export default UserList;

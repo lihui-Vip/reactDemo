@@ -1,6 +1,8 @@
-const path = require("path");
+const path = require('path');
 var webpack = require('webpack');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var webpackBundleAnalyzer = require('webpack-bundle-analyzer');
+// var HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -16,7 +18,7 @@ module.exports = {
     publicPath: '/',
     filename: 'js/[name].js',
     path: resolve('../dist'),
-    chunkFilename: 'js/chunks/[id].js',
+    chunkFilename: 'js/chunks/[id].js'
   },
   module: {
     rules: [
@@ -24,17 +26,17 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
         test: /\.attached\.less$/,
         use: [
-          { loader: 'style-loader/useable' },  //useable  使用style.use() 或 style.unuse();
+          { loader: 'style-loader/useable' }, //useable  使用style.use() 或 style.unuse();
           // { loader: 'style-loader' },
           { loader: 'css-loader' },
-          { loader: 'less-loader' },
-        ],
+          { loader: 'less-loader' }
+        ]
       },
       {
         test: /\.global\.less$/,
@@ -42,30 +44,42 @@ module.exports = {
         use: [
           { loader: MiniCssExtractPlugin.loader },
           { loader: 'css-loader' },
-          { loader: 'postcss-loader' },
-        ],
+          { loader: 'less-loader' }
+        ]
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-        ],
-      },
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+      }
     ]
   },
   resolve: {
     extensions: ['.js', '.jsx', '.attached.less', '.global.less', '.less'],
     alias: {
-      '$lib': resolve('../src/lib'),
-    },
+      $lib: resolve('../src/lib'),
+      '@': resolve('../src')
+    }
   },
   plugins: [
+    new webpackBundleAnalyzer.BundleAnalyzerPlugin({
+      openAnalyzer: true
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/chunks/[id].css'
+    }),
     new HtmlWebpackPlugin({
       api: 'http://10.20.0.56:8088/',
       title: 'react',
-      template: resolve('index.html'),
+      template: resolve('index.html')
+      // chunks: {
+      //   main: {
+      //     entry: "js/runtime~main.js",
+      //     css: []
+      //   }
+      // }
     }),
+    // new HtmlWebpackInlineSourcePlugin(),
     new webpack.NamedChunksPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new webpack.ProvidePlugin({
@@ -74,9 +88,9 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"development"',
-      },
-    }),
+        NODE_ENV: '"production"'
+      }
+    })
   ],
   optimization: {
     runtimeChunk: true,
@@ -88,23 +102,25 @@ module.exports = {
       maxInitialRequests: 3,
       name: true,
       cacheGroups: {
+        default: false,
+        vendors: false,
         vendor: {
           name: 'vendor',
           chunks: 'initial',
           priority: 10,
           reuseExistingChunk: false,
-          test: /node_modules/
+          test: /[\\/]node_modules[\\/]/
         },
         async: {
           name: 'async',
           chunks: 'async',
           priority: 20,
           reuseExistingChunk: false,
-          test: /node_modules/
-        },
+          test: /[\\/]node_modules[\\/]/
+        }
       }
-    },
-  },
+    }
+  }
 };
 
 // chunks: 表示显示块的范围，有三个可选值：initial(初始块)、async(按需加载块)、all(全部块)，默认为all;

@@ -5,11 +5,11 @@
 import React, { Component } from 'react';
 // 引入antd组件
 // import { Icon, Form, Input, Button, message } from 'antd';
-import Icon from 'antd/lib/icon';
-import Form from 'antd/lib/form';
-import Input from 'antd/lib/input';
-import Button from 'antd/lib/button';
-import message from 'antd/lib/message';
+import Icon from 'antd/es/icon';
+import Form from 'antd/es/form';
+import Input from 'antd/es/input';
+import Button from 'antd/es/button';
+import message from 'antd/es/message';
 // 引入 封装后的fetch工具类
 import ajax from '$lib/utils/request';
 // 引入样式表

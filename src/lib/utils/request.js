@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { message } from 'antd';
+// import { message } from 'antd';
+import message from 'antd/es/message';
 const service = axios.create(),
   ejection = {};
 //添加请求拦截器

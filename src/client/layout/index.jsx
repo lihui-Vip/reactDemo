@@ -9,7 +9,6 @@ import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Icon from 'antd/lib/icon';
 import Menu from 'antd/lib/menu';
 
-
 // import HomePage from '../homePage'; // 首页
 // import UserList from '../userList';
 // import addUser from '../addUser';
@@ -38,7 +37,15 @@ class HomeLayout extends Component {
         <main className="main">
           <div className="menu">
             <Menu mode="inline" theme="dark" style={{ width: '240' }}>
-              <SubMenu key="user" title={<span><Icon type="user" /><span>用户管理</span></span>}>
+              <SubMenu
+                key="user"
+                title={
+                  <span>
+                    <Icon type="user" />
+                    <span>用户管理</span>
+                  </span>
+                }
+              >
                 <Menu.Item key="user-list">
                   <Link to="/user/list">用户列表</Link>
                 </Menu.Item>
@@ -47,7 +54,15 @@ class HomeLayout extends Component {
                 </Menu.Item>
               </SubMenu>
 
-              <SubMenu key="book" title={<span><Icon type="book" /><span>图书管理</span></span>}>
+              <SubMenu
+                key="book"
+                title={
+                  <span>
+                    <Icon type="book" />
+                    <span>图书管理</span>
+                  </span>
+                }
+              >
                 <Menu.Item key="book-list">
                   <Link to="/book/list">图书列表</Link>
                 </Menu.Item>
@@ -60,12 +75,11 @@ class HomeLayout extends Component {
           <div className="content">
             <Router>
               <Switch>
-
-              <Async path="/book/list" component={()=>import('../bookList')}/>
-              <Async path="/book/add" component={()=>import('../addBook')}/>
-              <Async path="/user/list" component={()=>import('../userList')}/>
-              <Async path="/user/add" component={()=>import('../addUser')}/>
-              <Async path="/" component={()=>import('../homePage')}/>
+                <Async path="/book/list" component={() => import('../bookList')} />
+                <Async path="/book/add" component={() => import('../addBook')} />
+                <Async path="/user/list" component={() => import('../userList')} />
+                <Async path="/user/add" component={() => import('../addUser')} />
+                <Async path="/" component={() => import('../homePage')} />
               </Switch>
             </Router>
           </div>
