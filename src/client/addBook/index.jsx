@@ -3,7 +3,13 @@
  */
 import React from 'react';
 // 引入 antd 组件
-import { Input, InputNumber, Form, Button, message } from 'antd';
+// import { Input, InputNumber, Form, Button, message } from 'antd';
+import message from 'antd/lib/message';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import InputNumber from 'antd/lib/input-number';
+import Select from 'antd/lib/select';
+import Button from 'antd/lib/button';
 // 引入 prop-types
 import PropTypes from 'prop-types';
 // 引入 封装fetch工具类
@@ -208,4 +214,5 @@ BookEditor.contextTypes = {
 
 BookEditor = Form.create()(BookEditor);
 
-export default BookEditor;
+// export default BookEditor;
+export default () => <Route component={BookEditor} />;

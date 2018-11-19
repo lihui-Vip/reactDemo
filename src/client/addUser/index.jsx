@@ -3,9 +3,15 @@
  */
 import React from 'react';
 // 引入 antd 组件
-import { Form, Input, InputNumber, Select, Button, message } from 'antd';
+// import { Form, Input, InputNumber, Select, Button, message } from 'antd';
+import message from 'antd/lib/message';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import InputNumber from 'antd/lib/input-number';
+import Select from 'antd/lib/select';
+import Button from 'antd/lib/button';
 // 引入 prop-types
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // 引入 封装fetch工具类
 import ajax from '$lib/utils/request';
 
@@ -149,9 +155,9 @@ class UserEditor extends React.Component {
 
 // 必须给UserEditor定义一个包含router属性的contextTypes
 // 使得组件中可以通过this.context.router来使用React Router提供的方法
-UserEditor.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+// UserEditor.contextTypes = {
+//   router: PropTypes.object.isRequired
+// };
 
 /**
  * 使用Form.create({ ... })(UserEditor)处理之后的UserEditor组件会接收到一个props.form
@@ -159,4 +165,5 @@ UserEditor.contextTypes = {
  */
 UserEditor = Form.create()(UserEditor);
 
-export default UserEditor;
+// export default UserEditor;
+export default () => <Route component={UserEditor} />;

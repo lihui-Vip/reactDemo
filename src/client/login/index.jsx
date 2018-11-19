@@ -4,7 +4,12 @@
  */
 import React, { Component } from 'react';
 // 引入antd组件
-import { Icon, Form, Input, Button, message } from 'antd';
+// import { Icon, Form, Input, Button, message } from 'antd';
+import Icon from 'antd/lib/icon';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Button from 'antd/lib/button';
+import message from 'antd/lib/message';
 // 引入 封装后的fetch工具类
 import ajax from '$lib/utils/request';
 // 引入样式表

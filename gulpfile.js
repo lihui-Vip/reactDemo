@@ -6,6 +6,7 @@ const packCommand = `node \
   -r babel-register \
   ./node_modules/webpack/bin/webpack \
     --display minimal \
+    --progress --display-modules \
     --config ./config/webpack.config.js \
 `;
 

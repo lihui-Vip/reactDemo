@@ -3,7 +3,11 @@
  */
 import React from 'react';
 // 引入 antd 组件
-import { message, Table, Button, Popconfirm } from 'antd';
+// import { message, Table, Button, Popconfirm } from 'antd';
+import message from 'antd/lib/message';
+import Table from 'antd/lib/table';
+import Button from 'antd/lib/button';
+import Popconfirm from 'antd/lib/popconfirm';
 // 引入 prop-types
 import PropTypes from 'prop-types';
 // 引入 封装fetch工具类
@@ -122,4 +126,5 @@ BookList.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
-export default BookList;
+// export default BookList;
+export default () => <Route component={BookList} />;

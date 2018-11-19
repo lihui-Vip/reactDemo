@@ -2,18 +2,21 @@
  * 布局组件
  */
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 // 路由
-import { Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 // Menu 导航菜单 Icon 图标
-import { Menu, Icon } from 'antd';
+// import { Menu, Icon } from 'antd';
+import Icon from 'antd/lib/icon';
+import Menu from 'antd/lib/menu';
 
-import HomePage from '../homePage'; // 首页
-import UserList from '../userList';
-import addUser from '../addUser';
-import bookList from '../bookList';
-import addBook from '../addBook';
+
+// import HomePage from '../homePage'; // 首页
+// import UserList from '../userList';
+// import addUser from '../addUser';
+// import bookList from '../bookList';
+// import addBook from '../addBook';
 import style from './css';
+import Async from '$lib/utils/async';
 
 // 左侧菜单栏
 const SubMenu = Menu.SubMenu;
@@ -57,11 +60,12 @@ class HomeLayout extends Component {
           <div className="content">
             <Router>
               <Switch>
-              <Route path="/book/list" component={bookList} />
-              <Route path="/book/add" component={addBook} />
-              <Route path="/user/list" component={UserList} />
-              <Route path="/user/add" component={addUser} />
-              <Route path="/" component={HomePage} />
+
+              <Async path="/book/list" component={()=>import('../bookList')}/>
+              <Async path="/book/add" component={()=>import('../addBook')}/>
+              <Async path="/user/list" component={()=>import('../userList')}/>
+              <Async path="/user/add" component={()=>import('../addUser')}/>
+              <Async path="/" component={()=>import('../homePage')}/>
               </Switch>
             </Router>
           </div>
