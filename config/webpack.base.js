@@ -11,7 +11,11 @@ function resolve(dir) {
 }
 
 module.exports = {
+  // performance: {
+  //   hints: false
+  // },
   //入口文件
+  devtool: false,
   entry: resolve('../src/client'),
   //出口文件
   output: {
@@ -98,15 +102,15 @@ module.exports = {
       chunks: 'all',
       minSize: 30000,
       minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
+      maxAsyncRequests: Infinity,
+      maxInitialRequests: Infinity,
       name: true,
       cacheGroups: {
         default: false,
         vendors: false,
         vendor: {
           name: 'vendor',
-          chunks: 'initial',
+          chunks: 'all',
           priority: 10,
           reuseExistingChunk: false,
           test: /[\\/]node_modules[\\/]/

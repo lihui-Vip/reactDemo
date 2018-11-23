@@ -2,6 +2,7 @@
  * 布局组件
  */
 import React, { Component } from 'react';
+import Loadable from 'react-loadable';
 // 路由
 import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 // Menu 导航菜单 Icon 图标
@@ -16,6 +17,47 @@ import Menu from 'antd/lib/menu';
 // import addBook from '../addBook';
 import style from './css';
 import Async from '$lib/utils/async';
+
+const MyLoadingComponent = ({ isLoading, error }) => {
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  else if (error) {
+    return <div>Sorry, there was a problem loading the page.</div>
+  }
+  else {
+    return null;
+  }
+};
+
+const HomePage = Loadable({
+  loader: () => import('../homePage'),
+  loading: MyLoadingComponent
+});
+const UserList = Loadable({
+  loader: () => import('../userList'),
+  loading: MyLoadingComponent
+});
+const addUser = Loadable({
+  loader: () => import('../addUser'),
+  loading: MyLoadingComponent
+});
+const bookList = Loadable({
+  loader: () => import('../bookList'),
+  loading: MyLoadingComponent
+});
+const addBook = Loadable({
+  loader: () => import('../addBook'),
+  loading: MyLoadingComponent
+});
+
+const routes = [
+  { path: '/book/list', component: bookList },
+  { path: '/book/add', component: addBook },
+  { path: '/user/list', component: UserList },
+  { path: '/user/add', component: addUser },
+  { path: '/', component: HomePage }
+]
 
 // 左侧菜单栏
 const SubMenu = Menu.SubMenu;
@@ -75,11 +117,11 @@ class HomeLayout extends Component {
           <div className="content">
             <Router>
               <Switch>
-                <Async path="/book/list" component={() => import('../bookList')} />
-                <Async path="/book/add" component={() => import('../addBook')} />
-                <Async path="/user/list" component={() => import('../userList')} />
-                <Async path="/user/add" component={() => import('../addUser')} />
-                <Async path="/" component={() => import('../homePage')} />
+                {
+                  routes.map(route => (
+                    <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
+                  ))
+                }
               </Switch>
             </Router>
           </div>
