@@ -8,6 +8,10 @@ import message from 'antd/es/message';
 import Table from 'antd/es/table';
 import Button from 'antd/es/button';
 import Popconfirm from 'antd/es/popconfirm';
+import Tabs from 'antd/es/tabs';
+
+console.log(Tabs.TabPane);
+const TabPane = Tabs.TabPane;
 // 引入 封装后的fetch工具类
 import ajax from '$lib/utils/request';
 
@@ -29,7 +33,7 @@ class UserList extends React.Component {
   componentWillMount() {
     // 请求数据
     ajax.get('/api/user/list')
-      .then(({data}) => {
+      .then(({ data }) => {
         /**
          * 成功的回调
          * 数据赋值
@@ -113,7 +117,25 @@ class UserList extends React.Component {
     ];
 
     return (
-      <Table columns={columns} dataSource={userList} rowKey={row => row.id} />
+      // <Table columns={columns} dataSource={userList} rowKey={row => row.id} />
+      <div className="card-container">
+        <Tabs defaultActiveKey="1" size='large'>
+          <TabPane tab="Tab Title 1" key="1">
+            <Table columns={columns} dataSource={userList} rowKey={row => row.id} />
+          </TabPane>
+          <TabPane tab="Tab Title 2" key="2">
+            <p>Content of Tab Pane 2</p>
+            <p>Content of Tab Pane 2</p>
+            <p>Content of Tab Pane 2</p>
+          </TabPane>
+          <TabPane tab="Tab Title 3" key="3">
+            <p>Content of Tab Pane 3</p>
+            <p>Content of Tab Pane 3</p>
+            <p>Content of Tab Pane 3</p>
+          </TabPane>
+        </Tabs>
+      </div>
+
     );
   }
 }
