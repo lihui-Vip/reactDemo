@@ -72,12 +72,11 @@ class HomeLayout extends Component {
   render() {
     return (
       <div>
-        <header className="header">
-          <Link to="/">Home</Link>
-        </header>
-
         <main className="main">
           <div className="menu">
+            <div className="logo">
+              <Link to="/">Home</Link>
+            </div>
             <Menu mode="inline" theme="dark" style={{ width: '240' }}>
               <SubMenu
                 key="user"
@@ -114,16 +113,22 @@ class HomeLayout extends Component {
               </SubMenu>
             </Menu>
           </div>
+
           <div className="content">
-            <Router>
-              <Switch>
-                {
-                  routes.map(route => (
-                    <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
-                  ))
-                }
-              </Switch>
-            </Router>
+            <div className="header">
+              123
+          </div>
+            <div className="main-content">
+              <Router>
+                <Switch>
+                  {
+                    routes.map(route => (
+                      <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
+                    ))
+                  }
+                </Switch>
+              </Router>
+            </div>
           </div>
         </main>
       </div>

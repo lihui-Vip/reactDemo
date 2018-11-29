@@ -1,7 +1,7 @@
 const path = require('path');
 var webpack = require('webpack');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var webpackBundleAnalyzer = require('webpack-bundle-analyzer');
+// var webpackBundleAnalyzer = require('webpack-bundle-analyzer');
 // var HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -15,7 +15,6 @@ module.exports = {
   //   hints: false
   // },
   //入口文件
-  devtool: false,
   entry: resolve('../src/client'),
   //出口文件
   output: {
@@ -65,9 +64,9 @@ module.exports = {
     }
   },
   plugins: [
-    new webpackBundleAnalyzer.BundleAnalyzerPlugin({
-      openAnalyzer: true
-    }),
+    // new webpackBundleAnalyzer.BundleAnalyzerPlugin({
+    //   openAnalyzer: true
+    // }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: 'css/chunks/[id].css'
@@ -90,11 +89,6 @@ module.exports = {
       react: 'react',
       _: 'underscore'
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    })
   ],
   optimization: {
     runtimeChunk: true,
