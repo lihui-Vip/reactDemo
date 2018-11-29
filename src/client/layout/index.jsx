@@ -9,14 +9,15 @@ import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 // import { Menu, Icon } from 'antd';
 import Icon from 'antd/lib/icon';
 import Menu from 'antd/lib/menu';
+import Layout from 'antd/lib/layout';
 
-// import HomePage from '../homePage'; // 首页
-// import UserList from '../userList';
-// import addUser from '../addUser';
-// import bookList from '../bookList';
-// import addBook from '../addBook';
 import style from './css';
 import Async from '$lib/utils/async';
+
+const { Header, Sider, Content } = Layout;
+
+// breadcrumb
+import Breadcrumb from './breadcrumb';
 
 const MyLoadingComponent = ({ isLoading, error }) => {
   if (isLoading) {
@@ -56,13 +57,22 @@ const routes = [
   { path: '/book/add', component: addBook },
   { path: '/user/list', component: UserList },
   { path: '/user/add', component: addUser },
-  { path: '/', component: HomePage }
+  { path: '/', component: HomePage },
 ]
 
 // 左侧菜单栏
 const SubMenu = Menu.SubMenu;
 
 class HomeLayout extends Component {
+  state = {
+    collapsed: false,
+  };
+
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
   componentDidMount() {
     style.use();
   }
@@ -71,67 +81,68 @@ class HomeLayout extends Component {
   }
   render() {
     return (
-      <div>
-        <main className="main">
-          <div className="menu">
-            <div className="logo">
-              <Link to="/">Home</Link>
-            </div>
-            <Menu mode="inline" theme="dark" style={{ width: '240' }}>
-              <SubMenu
-                key="user"
-                title={
-                  <span>
-                    <Icon type="user" />
-                    <span>用户管理</span>
-                  </span>
-                }
-              >
-                <Menu.Item key="user-list">
-                  <Link to="/user/list">用户列表</Link>
-                </Menu.Item>
-                <Menu.Item key="user-add">
-                  <Link to="/user/add">添加用户</Link>
-                </Menu.Item>
-              </SubMenu>
+      <Layout className="main">
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={this.state.collapsed}>
+          <div className="logo" >logo</div>
+          <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']}>
+            <SubMenu
+              key="user"
+              title={
+                <span>
+                  <Icon type="user" />
+                  <span>用户管理</span>
+                </span>
+              }>
+              <Menu.Item key="user-list">
+                <Link to="/user/list">用户列表</Link>
+              </Menu.Item>
+              <Menu.Item key="user-add">
+                <Link to="/user/add">添加用户</Link>
+              </Menu.Item>
+            </SubMenu>
 
-              <SubMenu
-                key="book"
-                title={
-                  <span>
-                    <Icon type="book" />
-                    <span>图书管理</span>
-                  </span>
+            <SubMenu
+              key="book"
+              title={
+                <span>
+                  <Icon type="book" />
+                  <span>图书管理</span>
+                </span>
+              }>
+              <Menu.Item key="book-list">
+                <Link to="/book/list">图书列表</Link>
+              </Menu.Item>
+              <Menu.Item key="book-add">
+                <Link to="/book/add">添加图书</Link>
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        </Sider>
+        <Layout>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <Icon
+              className="trigger"
+              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.toggle}
+            />
+          </Header>
+          <Breadcrumb></Breadcrumb>
+          <Content style={{ margin: '10px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+            <Router>
+              <Switch>
+                {
+                  routes.map(route => (
+                    <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
+                  ))
                 }
-              >
-                <Menu.Item key="book-list">
-                  <Link to="/book/list">图书列表</Link>
-                </Menu.Item>
-                <Menu.Item key="book-add">
-                  <Link to="/book/add">添加图书</Link>
-                </Menu.Item>
-              </SubMenu>
-            </Menu>
-          </div>
-
-          <div className="content">
-            <div className="header">
-              123
-          </div>
-            <div className="main-content">
-              <Router>
-                <Switch>
-                  {
-                    routes.map(route => (
-                      <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
-                    ))
-                  }
-                </Switch>
-              </Router>
-            </div>
-          </div>
-        </main>
-      </div>
+              </Switch>
+            </Router>
+          </Content>
+        </Layout>
+      </Layout>
     );
   }
 }
