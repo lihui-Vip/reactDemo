@@ -42,7 +42,7 @@ export default {
         params: param,
       }).then(res => {  //axios返回的是一个promise对象
         if (res !== ejection) {
-          resolve(res);
+          resolve(res.data);
         }  //resolve在promise执行器内部
       }).catch(err => {
         reject(err);
@@ -59,7 +59,7 @@ export default {
         params: param,
       }).then(res => {  //axios返回的是一个promise对象
         if (res !== ejection) {
-          resolve(res);
+          resolve(res.data);
         }  //resolve在promise执行器内部
       }).catch(err => {
         reject(err);
@@ -77,7 +77,8 @@ export default {
         $opts: opts,
       }).then(res => {
         if (res !== ejection) {
-          resolve(res);
+          console.log('res', res);
+          resolve(res.data);
         }
       }).catch(err => {
         reject(err);

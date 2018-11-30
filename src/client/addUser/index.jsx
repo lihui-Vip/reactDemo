@@ -11,7 +11,7 @@ import InputNumber from 'antd/es/input-number';
 import Select from 'antd/es/select';
 import Button from 'antd/es/button';
 // 引入 prop-types
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // 引入 封装fetch工具类
 import ajax from '$lib/utils/request';
 
@@ -52,7 +52,7 @@ class UserEditor extends React.Component {
       if (!err) {
         // 默认值
         let editType = '添加';
-        let apiUrl = 'http://localhost:8000/user';
+        let apiUrl = '/api/user/add';
         let method = 'post';
         // 判断类型
         if (editTarget) {
@@ -67,6 +67,7 @@ class UserEditor extends React.Component {
           .then((res) => {
             // 当添加成功时,返回的json对象中应包含一个有效的id字段
             // 所以可以使用res.id来判断添加是否成功
+            console.log(res);
             if (res.id) {
               message.success(editType + '添加用户成功!');
               // 跳转到用户列表页面
@@ -155,9 +156,9 @@ class UserEditor extends React.Component {
 
 // 必须给UserEditor定义一个包含router属性的contextTypes
 // 使得组件中可以通过this.context.router来使用React Router提供的方法
-// UserEditor.contextTypes = {
-//   router: PropTypes.object.isRequired
-// };
+UserEditor.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 /**
  * 使用Form.create({ ... })(UserEditor)处理之后的UserEditor组件会接收到一个props.form
