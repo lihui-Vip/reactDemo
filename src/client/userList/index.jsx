@@ -10,7 +10,6 @@ import Button from 'antd/es/button';
 import Popconfirm from 'antd/es/popconfirm';
 import Tabs from 'antd/es/tabs';
 
-console.log(Tabs.TabPane);
 const TabPane = Tabs.TabPane;
 // 引入 封装后的fetch工具类
 import ajax from '$lib/utils/request';
@@ -33,7 +32,7 @@ class UserList extends React.Component {
   componentWillMount() {
     // 请求数据
     ajax.get('/api/user/list')
-      .then(({ data }) => {
+      .then((data) => {
         /**
          * 成功的回调
          * 数据赋值

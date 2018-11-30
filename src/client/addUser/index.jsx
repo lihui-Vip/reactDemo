@@ -27,6 +27,14 @@ const formLayout = {
 };
 
 class UserEditor extends React.Component {
+  // 构造器
+  constructor(props, context) {
+    super(props, context);
+
+    console.log(context);
+    // 绑定this
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   // 生命周期--组件加载完毕
   componentDidMount() {
     /**
@@ -71,7 +79,7 @@ class UserEditor extends React.Component {
             if (res.id) {
               message.success(editType + '添加用户成功!');
               // 跳转到用户列表页面
-              this.context.router.push('/user/list');
+              this.context.router.history.push('/user/list');
               return;
             } else {
               message.error(editType + '添加用户失败!');

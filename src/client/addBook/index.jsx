@@ -29,8 +29,8 @@ const formLayout = {
 
 class BookEditor extends React.Component {
   // 构造器
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       recommendUsers: []

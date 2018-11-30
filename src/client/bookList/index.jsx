@@ -31,7 +31,7 @@ class BookList extends React.Component {
   componentWillMount() {
     // 请求数据
     ajax.get('/api/book/list')
-      .then(({data}) => {
+      .then((data) => {
         /**
          * 成功的回调
          * 数据赋值
