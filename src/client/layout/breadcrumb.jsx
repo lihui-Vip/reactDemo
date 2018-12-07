@@ -8,6 +8,7 @@ const breadcrumbNameMap = {
   '/book': '图书管理',
   '/user/list': '用户列表',
   '/user/add': '添加用户',
+  '/user/edit': '编辑用户',
   '/book/list': '图书列表',
   '/book/add': '添加图书',
 };

@@ -9,6 +9,8 @@ import Table from 'antd/es/table';
 import Button from 'antd/es/button';
 import Popconfirm from 'antd/es/popconfirm';
 import Tabs from 'antd/es/tabs';
+// 引入 prop-types
+import PropTypes from 'prop-types';
 
 const TabPane = Tabs.TabPane;
 // 引入 封装后的fetch工具类
@@ -18,6 +20,7 @@ class UserList extends React.Component {
   // 构造器
   constructor(props) {
     super(props);
+    console.log(props);
     // 定义初始化状态
     this.state = {
       userList: []
@@ -48,7 +51,8 @@ class UserList extends React.Component {
    */
   handleEdit(user) {
     // 跳转编辑页面
-    this.context.router.push('/user/edit/' + user.id);
+    console.log(this.context);
+    this.context.router.history.push('/user/edit/' + user.id);
   }
 
   /**
@@ -142,8 +146,8 @@ class UserList extends React.Component {
 /**
  * 任何使用this.context.xxx的地方，必须在组件的contextTypes里定义对应的PropTypes
  */
-// UserList.contextTypes = {
-//   router: PropTypes.object.isRequired
-// };
+UserList.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default UserList;

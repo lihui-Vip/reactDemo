@@ -10,6 +10,8 @@ import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Icon from 'antd/lib/icon';
 import Menu from 'antd/lib/menu';
 import Layout from 'antd/lib/layout';
+// 引入 prop-types
+import PropTypes from 'prop-types';
 
 import style from './css';
 import Async from '$lib/utils/async';
@@ -52,12 +54,15 @@ const addBook = Loadable({
   loading: MyLoadingComponent
 });
 
+console.log(HomePage);
+
 const routes = [
-  { path: '/book/list', component: bookList },
-  { path: '/book/add', component: addBook },
-  { path: '/user/list', component: UserList },
-  { path: '/user/add', component: addUser },
-  { path: '/', component: HomePage },
+  { path: '/book/list', aaa: {}, component: bookList },
+  { path: '/book/add', aaa: {}, component: addBook },
+  { path: '/user/list', aaa: {}, component: UserList },
+  { path: '/user/add', aaa: {}, component: addUser },
+  { path: '/user/edit/:id', aaa: {}, component: addUser },
+  { path: '/', aaa: {}, component: HomePage },
 ]
 
 // 左侧菜单栏
@@ -75,6 +80,7 @@ class HomeLayout extends Component {
   }
   componentDidMount() {
     style.use();
+    console.log(this.context);
   }
   componentWillUnmount() {
     style.unuse();
@@ -146,5 +152,9 @@ class HomeLayout extends Component {
     );
   }
 }
+
+HomeLayout.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default HomeLayout;
